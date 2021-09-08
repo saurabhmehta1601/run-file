@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "run-file": "bin/run-file.js"
+    "run": "bin/run-file.js"
   },
   "scripts": {},
   "keywords": [],
