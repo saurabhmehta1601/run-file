@@ -8,7 +8,7 @@ const fs = require("fs")
 const file = process.argv[2] 
 const ext = file.split(".").pop()
 
-if(ext == "cpp"){
+if(ext == "cpp" || ext=="c" ){
     const compile = spawn('g++' , [file], {stdio: ['pipe',process.stdout,process.stderr]})
     compile.on('close',code => {
         if(code === 0){
