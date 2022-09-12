@@ -1,14 +1,10 @@
 #! /usr/bin/env node
 
-const {
-  logError,
-  logSuccess,
-  logWarn,
-  logConsole,
-} = require("../src/utils/log");
+const { logError } = require("../src/utils/log");
 const runCpp = require("../src/scripts/runCpp");
 const runJs = require("../src/scripts/runJs");
 const { SUPPORTED_EXTENTIONS } = require("../src/utils/constants");
+const runC = require("../src/scripts/runC");
 
 const file = process.argv[2];
 // if file name not given throw error
@@ -23,6 +19,8 @@ if (SUPPORTED_EXTENTIONS.includes(ext)) {
     runCpp(file);
   } else if (ext === "js") {
     runJs(file);
+  } else if (ext === "c") {
+    runC(file);
   }
 } else {
   logError("Given file extention is not supported ");

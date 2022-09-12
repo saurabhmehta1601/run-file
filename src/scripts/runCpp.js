@@ -10,9 +10,8 @@ module.exports = (file) => {
     compiler = "g++";
   } else {
     logError("You do not have C++ compiler installed on your system .");
-    logConsole(
-      "Please install C++ compiler like g++ and make sure it is added to PATH"
-    );
+    logConsole("You may install g++ .");
+
     process.exit(1);
   }
 
