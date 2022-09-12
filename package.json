@@ -1,10 +1,10 @@
 {
-  "name": "runcode",
+  "name": "boom",
   "version": "1.0.0",
-  "description": "",
+  "description": "A nodejs cli to execute program files with single command.",
   "main": "index.js",
   "bin": {
-    "runcode": "bin/runcode.js"
+    "boom": "bin/boom.js"
   },
   "scripts": {},
   "keywords": [],
