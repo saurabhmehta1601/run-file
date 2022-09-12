@@ -29,7 +29,7 @@ function logSuccess(text) {
  * @param {string} text
  */
 function logConsole(text) {
-  console.log(chalk.blue.bold(text));
+  console.log(chalk.white.bold(text));
 }
 
 module.exports = {
