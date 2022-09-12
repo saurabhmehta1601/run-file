@@ -1,10 +1,10 @@
 {
-  "name": "boom",
+  "name": "run-my-file",
   "version": "1.0.0",
   "description": "A nodejs cli to execute program files with single command.",
   "main": "index.js",
   "bin": {
-    "boom": "bin/boom.js"
+    "run-my-file": "bin/runMyFile.js"
   },
   "scripts": {},
   "keywords": [],
