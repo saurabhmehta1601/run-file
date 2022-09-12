@@ -35,6 +35,7 @@ module.exports = (file) => {
         logError(error.toString());
       });
       run.on("close", (code) => {
+        console.log("\n");
         if (code == 0) {
           logSuccess("program successfully terminated .");
         } else {
