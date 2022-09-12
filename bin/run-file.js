@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 
-const chalk = require("chalk");
 const { spawn } = require("child_process");
 const {
   logError,
@@ -8,7 +7,7 @@ const {
   logWarn,
   logConsole,
 } = require("../src/utils/log");
-const fs = require("fs");
+const runCpp = require("../src/scripts/runCpp");
 
 const file = process.argv[2];
 if (!file) {
@@ -18,35 +17,17 @@ if (!file) {
 const ext = file.split(".").pop();
 
 if (ext == "cpp" || ext == "c") {
-  const compile = spawn("g++", [file], {
-    stdio: ["pipe", process.stdout, process.stderr],
-  });
-  compile.on("close", (code) => {
-    if (code === 0) {
-      const run = spawn("./a.out", { stdio: [process.stdin, "pipe", "pipe"] });
-      run.stdout.on("data", (data) => {
-        logConsole(data.toString());
-      });
-      run.on("close", (code) => {
-        if (code == 0) {
-          logSuccess("program successfully terminated .");
-          fs.unlinkSync("./a.out");
-        }
-      });
-    } else {
-      logWarn("File compilation unsuccessfull .");
-    }
-  });
+  runCpp(file);
 } else if (ext === "js") {
   const interpret = spawn("node", [file], {
     stdio: [process.stdin, "pipe", "pipe"],
   });
   interpret.stdout.on("data", (data) => {
-    logConsole(data.toString())
+    logConsole(data.toString());
   });
   interpret.on("close", (code) => {
     if (code === 0) {
-      logSuccess("Program successfully terminated .");
+      logSuccess("Program terminated .");
     } else {
       logWarn("File interpretation unsuccessfull .");
     }
