@@ -22,7 +22,7 @@ module.exports = (file) => {
         });
 
         run.stdout.on("data", (data) => {
-          logConsole(data.toString());
+          process.stdout.write(data.toString());
         });
 
         run.stderr.on("data", (error) => {

@@ -27,7 +27,7 @@ module.exports = (file) => {
     if (code === 0) {
       const run = spawn("./a.out", { stdio: [process.stdin, "pipe", "pipe"] });
       run.stdout.on("data", (data) => {
-        logConsole(data.toString());
+        process.stdout.write(data.toString());
       });
       run.stderr.on("data", (error) => {
         logError("RUNTIME ERROR ");

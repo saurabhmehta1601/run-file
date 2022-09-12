@@ -1,6 +1,6 @@
 const { spawn } = require("child_process");
 const hasbin = require("hasbin");
-const { logConsole, logWarn, logSuccess, logError } = require("../utils/log");
+const { logSuccess, logError } = require("../utils/log");
 
 module.exports = (file) => {
   if (hasbin.sync("node")) {
