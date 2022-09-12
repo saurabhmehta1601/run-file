@@ -28,8 +28,10 @@ module.exports = (file) => {
       run.on("close", (code) => {
         if (code == 0) {
           logSuccess("program successfully terminated .");
-          fs.unlinkSync("./a.out");
+        } else {
+          logWarn("Process exited with exit code " + code);
         }
+        fs.unlinkSync("./a.out");
       });
     } else {
       logWarn("File compilation unsuccessfull .");
