@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 
-const { spawn } = require("child_process");
 const {
   logError,
   logSuccess,
@@ -8,28 +7,24 @@ const {
   logConsole,
 } = require("../src/utils/log");
 const runCpp = require("../src/scripts/runCpp");
+const runJs = require("../src/scripts/runJs");
+const { SUPPORTED_EXTENTIONS } = require("../src/utils/constants");
 
 const file = process.argv[2];
+// if file name not given throw error
 if (!file) {
   logError("Please provide file name as argument to execute .");
   process.exit();
 }
 const ext = file.split(".").pop();
 
-if (ext == "cpp" || ext == "c") {
-  runCpp(file);
-} else if (ext === "js") {
-  const interpret = spawn("node", [file], {
-    stdio: [process.stdin, "pipe", "pipe"],
-  });
-  interpret.stdout.on("data", (data) => {
-    logConsole(data.toString());
-  });
-  interpret.on("close", (code) => {
-    if (code === 0) {
-      logSuccess("Program terminated .");
-    } else {
-      logWarn("File interpretation unsuccessfull .");
-    }
-  });
+if (SUPPORTED_EXTENTIONS.includes(ext)) {
+  if (ext == "cpp") {
+    runCpp(file);
+  } else if (ext === "js") {
+    runJs(file);
+  }
+} else {
+  logError("Given file extention is not supported ");
+  process.exit(1);
 }
