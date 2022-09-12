@@ -5,6 +5,7 @@ const runCpp = require("../src/scripts/runCpp");
 const runJs = require("../src/scripts/runJs");
 const { SUPPORTED_EXTENTIONS } = require("../src/utils/constants");
 const runC = require("../src/scripts/runC");
+const runJava = require("../src/scripts/runJava");
 
 const file = process.argv[2];
 // if file name not given throw error
@@ -21,6 +22,8 @@ if (SUPPORTED_EXTENTIONS.includes(ext)) {
     runJs(file);
   } else if (ext === "c") {
     runC(file);
+  } else if (ext === "java") {
+    runJava(file);
   }
 } else {
   logError("Given file extention is not supported ");
