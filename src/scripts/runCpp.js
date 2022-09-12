@@ -17,13 +17,22 @@ module.exports = (file) => {
   }
 
   const compile = spawn(compiler, [file], {
-    stdio: ["pipe", process.stdout, process.stderr],
+    stdio: ["pipe", process.stdout, "pipe"],
+  });
+
+  compile.stderr.on("data", (error) => {
+    logError("COMPILATION ERROR");
+    logConsole(error.toString());
   });
   compile.on("close", (code) => {
     if (code === 0) {
       const run = spawn("./a.out", { stdio: [process.stdin, "pipe", "pipe"] });
       run.stdout.on("data", (data) => {
         logConsole(data.toString());
+      });
+      run.stderr.on("data", (error) => {
+        logError("RUNTIME ERROR ");
+        logError(error.toString());
       });
       run.on("close", (code) => {
         if (code == 0) {
@@ -33,8 +42,6 @@ module.exports = (file) => {
         }
         fs.unlinkSync("./a.out");
       });
-    } else {
-      logWarn("File compilation unsuccessfull .");
     }
   });
 };
